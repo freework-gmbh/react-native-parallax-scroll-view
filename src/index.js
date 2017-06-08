@@ -8,7 +8,7 @@ import {
 
 const styles = require('./styles');
 
-const { bool, func, number, string } = React.PropTypes;
+const { bool, func, number, string, object } = React.PropTypes;
 
 const window = Dimensions.get('window');
 
@@ -42,6 +42,8 @@ const IPropTypes = {
   renderScrollComponent: func,
   renderStickyHeader: func,
   stickyHeaderHeight: number,
+  disableStickHeaderAnimation: bool,
+  stickyHeaderStyle: object,
   contentContainerStyle: View.propTypes.style
 };
 
