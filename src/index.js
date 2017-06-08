@@ -303,7 +303,7 @@ class ParallaxScrollView extends Component {
                     outputRange: [0, 1],
                     extrapolate: 'clamp'
                   })
-                }, (stickyHeaderStyle ? stickyHeaderStyle : null)]}>
+                }, stickyHeaderStyle]}>
                   <Animated.View
                     style={{
                     transform: [{
@@ -342,7 +342,8 @@ ParallaxScrollView.defaultProps = {
   renderParallaxHeader: renderEmpty, // Deprecated (will be removed in 0.18.0)
   renderForeground: null,
   stickyHeaderHeight: 0,
-  contentContainerStyle: null
+  contentContainerStyle: null,
+  stickyHeaderStyle: {},
 };
 
 module.exports = ParallaxScrollView;
