@@ -68,29 +68,31 @@ class ParallaxScrollView extends Component {
   render() {
     const {
       backgroundColor,
+      parallaxHeaderHeight,
+      stickyHeaderHeight,
+      stickyHeaderStyle,
+      disableStickHeaderAnimation,
       backgroundScrollSpeed,
-      children,
       contentBackgroundColor,
       fadeOutForeground,
       fadeOutBackground,
-      parallaxHeaderHeight,
+      style,
+      contentContainerStyle,
       renderBackground,
       renderFixedHeader,
       renderForeground,
       renderParallaxHeader,
       renderScrollComponent,
       renderStickyHeader,
-      stickyHeaderHeight,
-      style,
-      contentContainerStyle,
-      ...scrollViewProps
+      children,
+      ... scrollViewProps,
     } = this.props;
 
     const background = this._renderBackground({ fadeOutBackground, backgroundScrollSpeed, backgroundColor, parallaxHeaderHeight, stickyHeaderHeight, renderBackground });
     const foreground = this._renderForeground({ fadeOutForeground, parallaxHeaderHeight, stickyHeaderHeight, renderForeground: renderForeground || renderParallaxHeader });
     const bodyComponent = this._wrapChildren(children, { contentBackgroundColor, stickyHeaderHeight, contentContainerStyle });
     const footerSpacer = this._renderFooterSpacer({ contentBackgroundColor });
-    const maybeStickyHeader = this._maybeRenderStickyHeader({ parallaxHeaderHeight, stickyHeaderHeight, backgroundColor, renderFixedHeader, renderStickyHeader });
+    const maybeStickyHeader = this._maybeRenderStickyHeader({ parallaxHeaderHeight, stickyHeaderHeight, backgroundColor, renderFixedHeader, renderStickyHeader, stickyHeaderStyle, disableStickHeaderAnimation});
     const scrollElement = renderScrollComponent(scrollViewProps);
 
     return (
