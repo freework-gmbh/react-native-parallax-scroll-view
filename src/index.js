@@ -168,6 +168,10 @@ class ParallaxScrollView extends Component {
     const { nativeEvent: { contentOffset: { y: offsetY } } } = e;
     const p = pivotPoint(parallaxHeaderHeight, stickyHeaderHeight);
 
+    this.setState({
+      redrawToMapScroll: true
+    });
+
     if (offsetY <= p || scrollY._value <= p) {
       scrollY.setValue(offsetY);
     }
@@ -276,17 +280,22 @@ class ParallaxScrollView extends Component {
     );
   }
 
-  _maybeRenderStickyHeader({ parallaxHeaderHeight, stickyHeaderHeight, backgroundColor, renderFixedHeader, renderStickyHeader }) {
+  _maybeRenderStickyHeader({ parallaxHeaderHeight, stickyHeaderHeight, backgroundColor, renderFixedHeader, renderStickyHeader, stickyHeaderStyle, disableStickHeaderAnimation}) {
     const { viewWidth, scrollY } = this.state;
     if (renderStickyHeader || renderFixedHeader) {
       const p = pivotPoint(parallaxHeaderHeight, stickyHeaderHeight);
+
+      if (scrollY._value < p && disableStickHeaderAnimation) {
+        return undefined;
+      }
+
       return (
         <View style={[styles.stickyHeader, { width: viewWidth, ...(stickyHeaderHeight ? { height: stickyHeaderHeight } : null ) }]}>
           {
             renderStickyHeader
               ? (
                 <Animated.View
-                  style={{
+                  style={[{
                   backgroundColor: backgroundColor,
                   height: stickyHeaderHeight,
                   opacity: interpolate(scrollY, {
@@ -294,7 +303,7 @@ class ParallaxScrollView extends Component {
                     outputRange: [0, 1],
                     extrapolate: 'clamp'
                   })
-                }}>
+                }, (stickyHeaderStyle ? stickyHeaderStyle : null)]}>
                   <Animated.View
                     style={{
                     transform: [{
