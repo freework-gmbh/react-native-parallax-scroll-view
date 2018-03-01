@@ -4,7 +4,8 @@ import {
   Animated,
   Dimensions,
   ScrollView,
-  View
+  View,
+  ViewPropTypes,
 } from 'react-native';
 
 const styles = require('./styles');
@@ -45,7 +46,7 @@ const IPropTypes = {
   stickyHeaderHeight: number,
   disableStickHeaderAnimation: bool,
   stickyHeaderStyle: object,
-  contentContainerStyle: View.propTypes.style
+  contentContainerStyle: ViewPropTypes.style,
 };
 
 class ParallaxScrollView extends Component {
