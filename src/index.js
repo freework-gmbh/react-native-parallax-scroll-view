@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import {
   Animated,
@@ -8,7 +9,7 @@ import {
 
 const styles = require('./styles');
 
-const { bool, func, number, string, object } = React.PropTypes;
+const { bool, func, number, string, object } = PropTypes;
 
 const window = Dimensions.get('window');
 
